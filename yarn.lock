@@ -101,6 +101,41 @@
   dependencies:
     "tslib" "^2.4.0"
 
+"@tanstack/query-core@4.12.0":
+  "integrity" "sha512-KEiFPNLMFByhNL2s6RBFL6Z5cNdwwQzFpW/II3GY+rEuQ343ZEoVyQ48zlUXXkEkbamQFIFg2onM8Pxf0Yo01A=="
+  "resolved" "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.12.0.tgz"
+  "version" "4.12.0"
+
+"@tanstack/react-query@^4.12.0", "@tanstack/react-query@^4.3.8":
+  "integrity" "sha512-prchV1q+CJ0ZVo8Rts2cOF3azDfQizZZySmH6XXsXRcPTbir0sgb9fp0vY/5l5ZkSYjTvWt/OL8WQhAhYMSvrA=="
+  "resolved" "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.12.0.tgz"
+  "version" "4.12.0"
+  dependencies:
+    "@tanstack/query-core" "4.12.0"
+    "use-sync-external-store" "^1.2.0"
+
+"@trpc/client@^10.0.0-proxy-beta.21", "@trpc/client@10.0.0-proxy-beta.21":
+  "integrity" "sha512-vjNetqOEhr/aLLEFr4c/QLOTPQH8xFQ3SPG7p7s9PKuv4QFzyHL7C49XNzEh2rp+A5f5D01pM0LXGl6Lf0whZA=="
+  "resolved" "https://registry.npmjs.org/@trpc/client/-/client-10.0.0-proxy-beta.21.tgz"
+  "version" "10.0.0-proxy-beta.21"
+
+"@trpc/next@^10.0.0-proxy-beta.21":
+  "integrity" "sha512-H00lTKJ5VqgtnMWcM7sN/K2jiTONjzpvDk8KQgaPq/OgAEi+xI7TcKPX1jRW/rfxdXAGY4RQ/w5k9joWxD2QfA=="
+  "resolved" "https://registry.npmjs.org/@trpc/next/-/next-10.0.0-proxy-beta.21.tgz"
+  "version" "10.0.0-proxy-beta.21"
+  dependencies:
+    "react-ssr-prepass" "^1.5.0"
+
+"@trpc/react-query@^10.0.0-proxy-beta.21":
+  "integrity" "sha512-olcnfm8VECSuX9w89lYtzSJNf9WsnCQzQDOfC7m5hGCZdh1j0lWr70VwMmbIfO7cgqlKIqtPORb8rnOa9pFFZg=="
+  "resolved" "https://registry.npmjs.org/@trpc/react-query/-/react-query-10.0.0-proxy-beta.21.tgz"
+  "version" "10.0.0-proxy-beta.21"
+
+"@trpc/server@^10.0.0-proxy-beta.21", "@trpc/server@10.0.0-proxy-beta.21":
+  "integrity" "sha512-FLkBn8K4tFeuhjcljehzak5b4ZGRCTUn1SJq3tecCBVUsDXiQ8ex/PG/a2W1V9Ji/st6uIK7U2D/EUgsE7ZzcQ=="
+  "resolved" "https://registry.npmjs.org/@trpc/server/-/server-10.0.0-proxy-beta.21.tgz"
+  "version" "10.0.0-proxy-beta.21"
+
 "@types/json-schema@^7.0.9":
   "integrity" "sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ=="
   "resolved" "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.11.tgz"
@@ -1379,7 +1414,7 @@
   "resolved" "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   "version" "1.4.0"
 
-"next@12.3.1":
+"next@*", "next@12.3.1":
   "integrity" "sha512-l7bvmSeIwX5lp07WtIiP9u2ytZMv7jIeB8iacR28PuUEFG5j0HGAPnMqyG5kbZNBG2H7tRsrQ4HCjuMOPnANZw=="
   "resolved" "https://registry.npmjs.org/next/-/next-12.3.1.tgz"
   "version" "12.3.1"
@@ -1666,7 +1701,7 @@
   "resolved" "https://registry.npmjs.org/quick-lru/-/quick-lru-5.1.1.tgz"
   "version" "5.1.1"
 
-"react-dom@^17.0.2 || ^18.0.0-0", "react-dom@18.2.0":
+"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>=16.8.0", "react-dom@18.2.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -1679,7 +1714,12 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@18.2.0":
+"react-ssr-prepass@^1.5.0":
+  "integrity" "sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ=="
+  "resolved" "https://registry.npmjs.org/react-ssr-prepass/-/react-ssr-prepass-1.5.0.tgz"
+  "version" "1.5.0"
+
+"react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.8.0", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -1995,7 +2035,7 @@
   dependencies:
     "punycode" "^2.1.0"
 
-"use-sync-external-store@1.2.0":
+"use-sync-external-store@^1.2.0", "use-sync-external-store@1.2.0":
   "integrity" "sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA=="
   "resolved" "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz"
   "version" "1.2.0"
