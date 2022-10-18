@@ -14,9 +14,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## About
 
-This is a web-app that...
+This is a web-app that allows users to vote, between two random characters, in who would win in a fight. Users can also submit characters and see statistics on the strongest and weakest characters.
 
-The goal is to...
+The goal is for me to practice fullstack applications with one that doesn't require auth and has a simple UI.
 
 ## See it live
 
@@ -74,4 +74,6 @@ Ps: Group in folders based on functionality first, and then on categories inside
 
 ## Reference Links
 
-- https://...
+- https://nextjs.org/learn/basics/create-nextjs-app
+- https://trpc.io/docs/v10/quickstart
+- https://trpc.io/docs/v10/nextjs
