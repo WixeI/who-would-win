@@ -1,7 +1,15 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
+  //PS: you only get the type-safe befenits if you call endpoints with trcp.[endpointName]
+  const winner = trpc.obviously.useQuery({ text: 'Ratatouille' });
+
+  if (!winner.data) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Head>
@@ -10,7 +18,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1 className="font-blackOpsOne text-5xl">Who Would Win in a Fight?</h1>
-      <h1>Default text</h1>
+      <p>{winner.data.winnerMessage}</p>
     </div>
   );
 };

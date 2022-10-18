@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -12,23 +10,68 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## About
 
-## Learn More
+This is a web-app that...
 
-To learn more about Next.js, take a look at the following resources:
+The goal is to...
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## See it live
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<!-- http://WixeI.github.io/focus-parkour -->
 
-## Deploy on Vercel
+## Demonstration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![demonstration-gif](./demonstration.gif)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## New stuff I learned
+
+- tRCP to abstract API layer between server and client and provide type-safety
+- shortened paths with "@" by tsconfig
+- Next.js with APIs
+- Database communication and creation (using Postgre)
+- Prisma as an ORM to utilize relational databases
+- Tailwind setup in Next.js
+-
+
+## This project used:
+
+- React Icons
+- Tailwind Css
+- Framer Motion
+- Immer (and use-immer)
+- Typescript
+- Prettier and ESLint (ESLint Plugin Jest included)
+- React Hook Form
+
+## Folder Structure inside Global and Pages:
+
+### Rules
+
+- Folders must have category names or descriptive names
+- Use index files for entry points of folders
+- When next to index file, other files must have category names, otherwise they can be descriptive names
+- Aggregator files gather contents to export as one
+
+### Categories:
+
+- components: holds React components
+- constants: holds data that does not change
+- contexts: holds React contexts
+- hooks: holds React hooks
+- resources: holds media files (images, vectors, videos, subtitles, music, sfx, 3d, rigs)
+- styles: holds stylization files
+- tests: holds test files
+- types: holds type files
+- utilities: holds pure functions
+- animations: holds animation-related files
+- services: holds request-related files
+- translations: holds translation-related files
+
+Ps: Group in folders based on functionality first, and then on categories inside these functionalities
+
+## Reference Links
+
+- https://...
