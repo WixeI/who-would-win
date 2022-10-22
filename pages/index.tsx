@@ -1,13 +1,22 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useState } from 'react';
 import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
   //PS: you only get the type-safe befenits if you call endpoints with trcp.[endpointName]
-  const winner = trpc.obviously.useQuery({ text: 'Ratatouille' });
+  const { data } = trpc.getCharacters.useQuery();
+  const createCharacterMutation = trpc.createCharacter.useMutation();
+  const [teste, setTeste] = useState(34);
+  // if (!data) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (!winner.data) {
-    return <div>Loading...</div>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function onSubmitCreateCharacter(e: any) {
+    e.preventDefault();
+    if (e.target[0]) createCharacterMutation.mutate({ name: e.target[0].value });
+    console.log(createCharacterMutation.data?.character);
   }
 
   return (
@@ -18,7 +27,20 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1 className="font-blackOpsOne text-5xl">Who Would Win in a Fight?</h1>
-      <p>{winner.data.winnerMessage}</p>
+      <p>
+        {data?.char1?.name} and {data?.char2?.name}
+      </p>
+      <p>
+        {data?.id1} and {data?.id2}
+      </p>
+      <form onSubmit={onSubmitCreateCharacter}>
+        <input name="text" type="text" />
+        <button type="submit" className="rounded-md bg-emerald-400 p-2">
+          Adicionar
+        </button>
+      </form>
+
+      <h1 onClick={() => setTeste((prev) => prev + 1)}>Tagg: {teste}</h1>
     </div>
   );
 };

@@ -3,7 +3,8 @@ import { httpBatchLink } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
 import type { AppRouter } from '../server/routers/_app';
 
-// You do not need to change anything in this file, it is boiler-plate for trcp to work in general
+// The first function is just boiler-plate, but the export can be edited.
+// Example: if you want to use the queries in client side instead of SSR, change SSR to false
 // The only export here (trpc) you use on client-side everywhere. Keep that in mind.
 
 function getBaseUrl() {

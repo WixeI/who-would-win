@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Planet Scale Best Practices: 
+//    https://planetscale.com/docs/tutorials/automatic-prisma-migrations#quick-introduction-to-prismas-db-push
+// Prisma supports this decision of db push instead of migrate dev for pscale: 
+//    https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-planetscale#creating-the-database-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Match {
+  id        Int      @default(autoincrement()) @id
+  victorious    Character     @relation(name: "victoriousCharacter", fields: [victoriousId], references: [id])
+  victoriousId  Int
+  loser Character @relation(name: "loserCharacter", fields: [loserId], references: [id])
+  loserId Int
+}
+
+model Character {
+  id      Int      @default(autoincrement()) @id
+  name    String
+  victories   Match[] @relation(name: "victoriousCharacter")
+  losses Match[] @relation(name: "loserCharacter")
+}
