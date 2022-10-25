@@ -34,16 +34,16 @@ export const trpc = createTRPCNext<AppRouter>({
            **/
           url: `${getBaseUrl()}/api/trpc`
         })
-      ]
+      ],
       /**
        * @link https://react-query-v3.tanstack.com/reference/QueryClient
        **/
-      // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+      queryClientConfig: { defaultOptions: { queries: { refetchOnWindowFocus: false } } }
     };
   },
   /**
    * @link https://trpc.io/docs/ssr
    **/
-  ssr: true
+  ssr: false
 });
 // => { useQuery: ..., useMutation: ...}
