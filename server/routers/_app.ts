@@ -9,7 +9,7 @@ export const appRouter = router({
   getCharacters: publicProcedure.query(async () => {
     const numberOfCharacters = await prisma.character.count();
 
-    if (numberOfCharacters < 2) return;
+    if (numberOfCharacters < 2) return { success: false };
 
     const id1 = Math.floor(Math.random() * numberOfCharacters) + 1;
     let id2 = Math.floor(Math.random() * numberOfCharacters) + 1;
@@ -35,7 +35,17 @@ export const appRouter = router({
       const character = await prisma.character.create({ data: { name: input.name } });
       return { success: true, character: character };
     }),
-  castVote: publicProcedure.input(z.object({})).mutation(async ({ input }) => {})
+  castVote: publicProcedure
+    .input(
+      z.object({
+        victoriousId: z.number(),
+        loserId: z.number()
+      })
+    )
+    .mutation(async ({ input }) => {
+      const match = await prisma.match.create({ data: { ...input } });
+      return { success: true, match: match };
+    })
 });
 
 // export type definition of API

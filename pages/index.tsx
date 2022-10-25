@@ -6,12 +6,13 @@ import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
   const { data, refetch } = trpc.getCharacters.useQuery();
-  // const createCharacterMutation = trpc.createCharacter.useMutation();
+  const castVoteMutation = trpc.castVote.useMutation();
 
   if (!data) {
     return <div>Loading...</div>;
   }
 
+  // const createCharacterMutation = trpc.createCharacter.useMutation();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // function onSubmitCreateCharacter(e: any) {
   //   e.preventDefault();
@@ -19,7 +20,18 @@ const Home: NextPage = () => {
   //   console.log(createCharacterMutation.data?.character);
   // }
 
-  function handleCastVote(e: any) {}
+  function castVote(selected: 'first' | 'second') {
+    if (!data || !data.char1 || !data.char2) return { success: false };
+
+    if (selected === 'first')
+      castVoteMutation.mutate({ victoriousId: data.char1.id, loserId: data.char2.id });
+    else if (selected === 'second') {
+      castVoteMutation.mutate({ victoriousId: data.char2.id, loserId: data.char1.id });
+      console.log('Hedre');
+    }
+
+    refetch();
+  }
 
   function handleSkipFight(e: any) {
     refetch();
@@ -44,7 +56,9 @@ const Home: NextPage = () => {
         <section className="flex items-stretch justify-center gap-2 sm:gap-8">
           {/* Option 1 */}
           <div className="flex  flex-col items-center">
-            <button className="flex h-full w-full max-w-[300px] flex-col gap-4 rounded-md bg-neutral-700 p-4 shadow-sm shadow-neutral-900 sm:gap-8 sm:pb-8 md:aspect-square">
+            <button
+              onClick={() => castVote('first')}
+              className="flex h-full w-full max-w-[300px] flex-col gap-4 rounded-md bg-neutral-700 p-4 shadow-sm shadow-neutral-900 sm:gap-8 sm:pb-8 md:aspect-square">
               <img
                 src="https://static.boredpanda.com/blog/wp-content/uploads/2017/12/funny-weird-wtf-stock-photos-19-5a3926af95d9d__700.jpg"
                 alt="option-1"
@@ -58,7 +72,9 @@ const Home: NextPage = () => {
 
           {/* Option 2 */}
           <div className="flex  flex-col items-center">
-            <button className="flex h-full w-full max-w-[300px] flex-col gap-4 rounded-md bg-neutral-700 p-4 shadow-sm shadow-neutral-900 sm:gap-8 sm:pb-8 md:aspect-square">
+            <button
+              onClick={() => castVote('second')}
+              className="flex h-full w-full max-w-[300px] flex-col gap-4 rounded-md bg-neutral-700 p-4 shadow-sm shadow-neutral-900 sm:gap-8 sm:pb-8 md:aspect-square">
               <img
                 src="https://static.boredpanda.com/blog/wp-content/uploads/2017/12/funny-weird-wtf-stock-photos-19-5a3926af95d9d__700.jpg"
                 alt="option-1"
