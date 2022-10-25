@@ -12,6 +12,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
+## How to Run Locally
+
+- npm install it
+- run your database
+- change .env "DATABASE_URL" to yours
+- npm run dev
+
 ## About
 
 This is a web-app that allows users to vote, between two random characters, in who would win in a fight. Users can also submit characters and see statistics on the strongest and weakest characters.
