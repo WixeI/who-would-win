@@ -14,15 +14,13 @@ export const appRouter = router({
     const id1 = Math.floor(Math.random() * numberOfCharacters) + 1;
     let id2 = Math.floor(Math.random() * numberOfCharacters) + 1;
     while (id2 === id1) {
-      id2 = Math.floor(Math.random() * numberOfCharacters);
+      id2 = Math.floor(Math.random() * numberOfCharacters) + 1;
     }
 
     const char1 = await prisma.character.findFirst({ where: { id: id1 } });
     const char2 = await prisma.character.findFirst({ where: { id: id2 } });
 
     return {
-      id1,
-      id2,
       char1,
       char2
     };
@@ -36,7 +34,8 @@ export const appRouter = router({
     .mutation(async ({ input }) => {
       const character = await prisma.character.create({ data: { name: input.name } });
       return { success: true, character: character };
-    })
+    }),
+  castVote: publicProcedure.input(z.object({})).mutation(async ({ input }) => {})
 });
 
 // export type definition of API
