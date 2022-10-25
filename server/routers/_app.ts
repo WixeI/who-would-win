@@ -21,6 +21,7 @@ export const appRouter = router({
     const char2 = await prisma.character.findFirst({ where: { id: id2 } });
 
     return {
+      success: true,
       char1,
       char2
     };
@@ -45,6 +46,38 @@ export const appRouter = router({
     .mutation(async ({ input }) => {
       const match = await prisma.match.create({ data: { ...input } });
       return { success: true, match: match };
+    }),
+  getResults: publicProcedure
+    .input(
+      z
+        .object({
+          char1Id: z.number(),
+          char2Id: z.number()
+        })
+        .nullish()
+    )
+    .query(async ({ input }) => {
+      if (!input) return null;
+      const matches = await prisma.match.findMany({
+        where: {
+          OR: [
+            { AND: [{ victoriousId: input.char1Id }, { loserId: input.char2Id }] },
+            { AND: [{ victoriousId: input.char2Id }, { loserId: input.char1Id }] }
+          ]
+        }
+      });
+      const numberOfMatches = matches.length;
+
+      const numberOfVictories = {
+        char1: matches.filter((item) => item.victoriousId === input.char1Id).length,
+        char2: matches.filter((item) => item.victoriousId === input.char2Id).length
+      };
+      const percentages = {
+        char1: (numberOfVictories.char1 / numberOfMatches) * 100,
+        char2: (numberOfVictories.char2 / numberOfMatches) * 100
+      };
+
+      return { numberOfMatches, numberOfVictories, percentages };
     })
 });
 

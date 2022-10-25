@@ -1,12 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
+import { inferProcedureOutput } from '@trpc/server';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
+import { AppRouter } from '../server/routers/_app';
 import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
+  const ctx = trpc.useContext();
   const { data, refetch } = trpc.getCharacters.useQuery();
   const castVoteMutation = trpc.castVote.useMutation();
+  const [results, setResults] = useState<inferProcedureOutput<AppRouter['getResults']> | null>(
+    null
+  );
+  const [canVote, setCanVote] = useState(true);
 
   if (!data) {
     return <div>Loading...</div>;
@@ -20,20 +28,45 @@ const Home: NextPage = () => {
   //   console.log(createCharacterMutation.data?.character);
   // }
 
-  function castVote(selected: 'first' | 'second') {
+  async function castVote(selected: 'first' | 'second') {
     if (!data || !data.char1 || !data.char2) return { success: false };
 
     if (selected === 'first')
-      castVoteMutation.mutate({ victoriousId: data.char1.id, loserId: data.char2.id });
+      castVoteMutation.mutate(
+        { victoriousId: data.char1.id, loserId: data.char2.id },
+        {
+          onSuccess: async () => {
+            if (!data || !data.char1 || !data.char2) return;
+            const results = await ctx.getResults.fetch({
+              char1Id: data.char1.id,
+              char2Id: data.char2.id
+            });
+            setResults(results);
+            setCanVote(false);
+          }
+        }
+      );
     else if (selected === 'second') {
-      castVoteMutation.mutate({ victoriousId: data.char2.id, loserId: data.char1.id });
-      console.log('Hedre');
+      castVoteMutation.mutate(
+        { victoriousId: data.char2.id, loserId: data.char1.id },
+        {
+          onSuccess: async () => {
+            if (!data || !data.char1 || !data.char2) return;
+            const results = await ctx.getResults.fetch({
+              char1Id: data.char1.id,
+              char2Id: data.char2.id
+            });
+            setResults(results);
+            setCanVote(false);
+          }
+        }
+      );
     }
-
-    refetch();
   }
 
   function handleSkipFight(e: any) {
+    setResults(null);
+    setCanVote(true);
     refetch();
   }
 
@@ -57,7 +90,8 @@ const Home: NextPage = () => {
           {/* Option 1 */}
           <div className="flex  flex-col items-center">
             <button
-              onClick={() => castVote('first')}
+              onClick={() => canVote && castVote('first')}
+              disabled={!canVote}
               className="flex h-full w-full max-w-[300px] flex-col gap-4 rounded-md bg-neutral-700 p-4 shadow-sm shadow-neutral-900 sm:gap-8 sm:pb-8 md:aspect-square">
               <img
                 src="https://static.boredpanda.com/blog/wp-content/uploads/2017/12/funny-weird-wtf-stock-photos-19-5a3926af95d9d__700.jpg"
@@ -66,6 +100,7 @@ const Home: NextPage = () => {
               <h2 className="md:text-xl">{data.char1?.name}</h2>
             </button>
             {/* Percentage */}
+            {results && <p>{results.percentages.char1.toFixed(1)}%</p>}
           </div>
 
           <span className="self-center">vs</span>
@@ -73,7 +108,8 @@ const Home: NextPage = () => {
           {/* Option 2 */}
           <div className="flex  flex-col items-center">
             <button
-              onClick={() => castVote('second')}
+              onClick={() => canVote && castVote('second')}
+              disabled={!canVote}
               className="flex h-full w-full max-w-[300px] flex-col gap-4 rounded-md bg-neutral-700 p-4 shadow-sm shadow-neutral-900 sm:gap-8 sm:pb-8 md:aspect-square">
               <img
                 src="https://static.boredpanda.com/blog/wp-content/uploads/2017/12/funny-weird-wtf-stock-photos-19-5a3926af95d9d__700.jpg"
@@ -82,11 +118,12 @@ const Home: NextPage = () => {
               <h2 className="md:text-xl">{data.char2?.name}</h2>
             </button>
             {/* Percentage */}
+            {results && <p>{results.percentages.char2.toFixed(1)}%</p>}
           </div>
         </section>
 
         {/* Next Button */}
-        <button onClick={handleSkipFight}>Skip Fight</button>
+        <button onClick={handleSkipFight}>Next Fight</button>
       </main>
 
       <footer className="flex flex-col items-center gap-2 px-4 py-8">
