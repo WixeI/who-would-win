@@ -64,7 +64,7 @@ const Home: NextPage = () => {
     }
   }
 
-  function handleSkipFight(e: any) {
+  function handleSkipFight() {
     setResults(null);
     setCanVote(true);
     refetch();
