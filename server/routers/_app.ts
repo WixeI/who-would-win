@@ -78,7 +78,29 @@ export const appRouter = router({
       };
 
       return { numberOfMatches, numberOfVictories, percentages };
-    })
+    }),
+  getTop20: publicProcedure.query(async () => {
+    const list = await prisma.character.findMany({
+      take: 20,
+      orderBy: [
+        {
+          victories: { _count: 'desc' }
+        }
+      ]
+    });
+    return list;
+  }),
+  getBottom20: publicProcedure.query(async () => {
+    const list = await prisma.character.findMany({
+      take: 20,
+      orderBy: [
+        {
+          losses: { _count: 'desc' }
+        }
+      ]
+    });
+    return list;
+  })
 });
 
 // export type definition of API
