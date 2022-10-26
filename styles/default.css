@@ -9,3 +9,7 @@
 body {
   @apply bg-zinc-800 text-stone-50;
 }
+
+* {
+  box-sizing: border-box;
+}
