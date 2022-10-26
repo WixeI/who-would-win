@@ -126,7 +126,7 @@ const Home: NextPage = () => {
       <footer className="flex flex-col items-center gap-2 px-4 py-8">
         {/* Textos */}
         <p>
-          Website made by <a href="#">Paulo Portela Martins</a>
+          Created by <a href="https://github.com/WixeI">Paulo Portela Martins</a>
         </p>
       </footer>
     </div>
