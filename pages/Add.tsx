@@ -2,6 +2,7 @@ import { inferProcedureInput } from '@trpc/server';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
 import { AppRouter } from '../server/routers/_app';
 import { trpc } from '../utils/trpc';
 
@@ -10,9 +11,12 @@ type FormData = inferProcedureInput<AppRouter['createCharacter']>;
 const Add: NextPage = () => {
   const { register, handleSubmit, reset } = useForm<FormData>();
   const createCharacterMutation = trpc.createCharacter.useMutation();
+  const notifyAddedCharacter = (name: string) =>
+    toast.success(`Successfully added ${name}`, { position: 'bottom-center', theme: 'colored' });
 
   const handleCreateCharacter = handleSubmit((data) => {
     createCharacterMutation.mutate({ name: data.name });
+    notifyAddedCharacter(data.name);
     reset({ name: '' });
   });
 
@@ -35,13 +39,14 @@ const Add: NextPage = () => {
           </label>
 
           <button type="submit" className="mt-2 rounded-md bg-emerald-500 p-2">
-            Adicionar
+            Add Fighter
           </button>
         </form>
       </main>
       <footer>
         <Link href="/">Home</Link>
       </footer>
+      <ToastContainer />
     </div>
   );
 };

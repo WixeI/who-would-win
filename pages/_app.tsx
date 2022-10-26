@@ -1,4 +1,5 @@
 import '../styles/reset.css';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/default.css';
 import type { AppType } from 'next/app';
 import { trpc } from '../utils/trpc';

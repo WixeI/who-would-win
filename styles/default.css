@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --toastify-color-success: #10b981;
+}
+
 body {
   @apply bg-zinc-800 text-stone-50;
 }
