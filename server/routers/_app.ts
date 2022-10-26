@@ -29,7 +29,7 @@ export const appRouter = router({
   createCharacter: publicProcedure
     .input(
       z.object({
-        name: z.string()
+        name: z.string().min(1, { message: 'Must be 1 or more characters long' })
       })
     )
     .mutation(async ({ input }) => {
