@@ -10,29 +10,36 @@ enum Tabs {
 
 const Ranking: NextPage = () => {
   //Ranking Management
-  const top20 = trpc.getTop20.useQuery();
-  const bottom20 = trpc.getBottom20.useQuery();
+  const ranking = trpc.getRanking.useQuery();
+  console.log(ranking.data?.bottom20);
+  console.log(ranking.data?.winningRates);
 
   //Tab Management
   const [activeTab, setActiveTab] = useState<Tabs>(Tabs.top20);
   const Tab = [
     <div key="top20">
-      {top20.data?.map((item) => (
+      {ranking.data?.top20.map((item, index) => (
         <div
           key={item.id}
-          className="flex w-full justify-between rounded-sm border border-solid border-neutral-100 p-2">
-          <span>{item.name}</span>
-          <span>X Victories</span>
+          className="flex w-full items-center justify-between gap-4 rounded-sm border border-solid border-neutral-100 p-2">
+          <span className="text-lg">{item.name}</span>
+          <div className="flex flex-col items-end ">
+            <span>{item.victories.length} Victories</span>
+            <span>{ranking.data.winningRates.top20[index]}% winrate</span>
+          </div>
         </div>
       ))}
     </div>,
     <div key="bottom20">
-      {bottom20.data?.map((item) => (
+      {ranking.data?.bottom20.map((item, index) => (
         <div
           key={item.id}
-          className="flex w-full justify-between rounded-sm border border-solid border-neutral-100 p-2">
-          <span>{item.name}</span>
-          <span>X Losses</span>
+          className="flex w-full items-center justify-between gap-4 rounded-sm border border-solid border-neutral-100 p-2">
+          <span className="text-lg">{item.name}</span>
+          <div className="flex flex-col items-end ">
+            <span>{item.losses.length} Losses</span>
+            <span>{ranking.data.winningRates.bottom20[index]}% winrate</span>
+          </div>
         </div>
       ))}
     </div>
@@ -40,7 +47,7 @@ const Ranking: NextPage = () => {
 
   return (
     <>
-      <div className="flex h-screen w-screen flex-col items-center justify-between gap-12 overflow-x-hidden p-6">
+      <div className="flex w-screen flex-col items-center justify-between gap-12 overflow-x-hidden p-6">
         <h1 className="text-center font-blackOpsOne text-4xl sm:text-5xl md:text-6xl">Ranking</h1>
 
         <main className="flex h-full w-full flex-col items-center gap-6">

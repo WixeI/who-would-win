@@ -79,16 +79,40 @@ export const appRouter = router({
 
       return { numberOfMatches, numberOfVictories, percentages };
     }),
-  getTop20: publicProcedure.query(async () => {
-    const list = await prisma.character.findMany({
+  getRanking: publicProcedure.query(async () => {
+    const top20 = await prisma.character.findMany({
       take: 20,
-      orderBy: [
-        {
-          victories: { _count: 'desc' }
-        }
-      ]
+      orderBy: { victories: { _count: 'desc' } },
+      include: {
+        victories: { orderBy: { id: 'asc' } },
+        losses: { orderBy: { id: 'asc' } }
+      }
     });
-    return list;
+    const bottom20 = await prisma.character.findMany({
+      take: 20,
+      orderBy: { losses: { _count: 'desc' } },
+      include: {
+        victories: { orderBy: { id: 'asc' } },
+        losses: { orderBy: { id: 'asc' } }
+      }
+    });
+
+    const winningRates = {
+      top20: top20.map((item) => {
+        const numberOfVictories = item.victories.length;
+        const total = numberOfVictories + item.losses.length;
+        if (!total) return 0;
+        return ((numberOfVictories / total) * 100).toFixed(0);
+      }),
+      bottom20: bottom20.map((item) => {
+        const numberOfVictories = item.victories.length;
+        const total = numberOfVictories + item.losses.length;
+        if (!total) return 0;
+        return ((numberOfVictories / total) * 100).toFixed(0);
+      })
+    };
+
+    return { top20, bottom20, winningRates };
   }),
   getBottom20: publicProcedure.query(async () => {
     const list = await prisma.character.findMany({
