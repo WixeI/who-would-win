@@ -113,17 +113,6 @@ export const appRouter = router({
     };
 
     return { top20, bottom20, winningRates };
-  }),
-  getBottom20: publicProcedure.query(async () => {
-    const list = await prisma.character.findMany({
-      take: 20,
-      orderBy: [
-        {
-          losses: { _count: 'desc' }
-        }
-      ]
-    });
-    return list;
   })
 });
 
