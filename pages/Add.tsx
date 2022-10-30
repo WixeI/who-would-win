@@ -1,5 +1,3 @@
-// import { inferProcedureInput } from '@trpc/server';
-// import { AppRouter } from '../server/routers/_app';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -15,9 +13,7 @@ type FormData = {
 
 const Add: NextPage = () => {
   const { register, handleSubmit, reset } = useForm<FormData>();
-  const [previewImageSource, setPreviewImageSource] = useState(
-    'https://quantocustaviajar.com/blog/wp-content/uploads/2022/03/cat-scaled.jpg'
-  );
+  const [previewImageSource, setPreviewImageSource] = useState('');
   //Image Management
   const handleImagePreview = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
