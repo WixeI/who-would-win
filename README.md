@@ -19,6 +19,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - change .env "DATABASE_URL" to yours
 - npm run dev
 
+## External Sources
+
+- Vercel (project hosting)
+- Cloudinary (image hosting)
+- Planet Scale (SQL database)
+
 ## About
 
 This is a web-app that allows users to vote, between two random characters, in who would win in a fight. Users can also submit characters and see statistics on the strongest and weakest characters.
