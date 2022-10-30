@@ -85,10 +85,7 @@ const Home: NextPage = () => {
               onClick={() => canVote && castVote('first')}
               disabled={!canVote}
               className="flex h-full w-full max-w-[300px] flex-col gap-4 rounded-md bg-neutral-700 p-4 shadow-sm shadow-neutral-900 sm:gap-8 sm:pb-8 md:aspect-square">
-              <img
-                src="https://static.boredpanda.com/blog/wp-content/uploads/2017/12/funny-weird-wtf-stock-photos-19-5a3926af95d9d__700.jpg"
-                alt="option-1"
-              />
+              <img src={data.char1?.imageSource} alt="option-1" />
               <h2 className="md:text-xl">{data.char1?.name}</h2>
             </button>
             {/* Percentage */}
@@ -103,10 +100,7 @@ const Home: NextPage = () => {
               onClick={() => canVote && castVote('second')}
               disabled={!canVote}
               className="flex h-full w-full max-w-[300px] flex-col gap-4 rounded-md bg-neutral-700 p-4 shadow-sm shadow-neutral-900 sm:gap-8 sm:pb-8 md:aspect-square">
-              <img
-                src="https://static.boredpanda.com/blog/wp-content/uploads/2017/12/funny-weird-wtf-stock-photos-19-5a3926af95d9d__700.jpg"
-                alt="option-1"
-              />
+              <img src={data.char2?.imageSource} alt="option-2" />
               <h2 className="md:text-xl">{data.char2?.name}</h2>
             </button>
             {/* Percentage */}

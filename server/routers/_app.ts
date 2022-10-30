@@ -29,12 +29,18 @@ export const appRouter = router({
   createCharacter: publicProcedure
     .input(
       z.object({
-        name: z.string().min(1, { message: 'Must be 1 or more characters long' })
+        name: z.string().min(1, { message: 'Must be 1 or more characters long' }),
+        imageSource: z.string()
       })
     )
     .mutation(async ({ input }) => {
-      const character = await prisma.character.create({ data: { name: input.name } });
-      return { success: true, character: character };
+      const character = await prisma.character.create({
+        data: { name: input.name, imageSource: input.imageSource }
+      });
+      return {
+        success: true,
+        character: character
+      };
     }),
   castVote: publicProcedure
     .input(

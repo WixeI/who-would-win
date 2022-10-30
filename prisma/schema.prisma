@@ -27,6 +27,7 @@ model Match {
 model Character {
   id      Int      @default(autoincrement()) @id
   name    String
+  imageSource String
   victories   Match[] @relation(name: "victoriousCharacter")
   losses Match[] @relation(name: "loserCharacter")
 }
