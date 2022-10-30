@@ -1,16 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'quantocustaviajar.com',
-        port: ''
-      }
-    ]
-  }
+  swcMinify: true
 };
 
 module.exports = nextConfig;
