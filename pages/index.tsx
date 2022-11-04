@@ -3,7 +3,7 @@ import { inferProcedureOutput } from '@trpc/server';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppRouter } from '../server/routers/_app';
 import { trpc } from '../utils/trpc';
 
@@ -15,6 +15,10 @@ const Home: NextPage = () => {
     null
   );
   const [canVote, setCanVote] = useState(true);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   if (!data) {
     return <div>Loading...</div>;

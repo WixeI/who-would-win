@@ -11,14 +11,34 @@ export const appRouter = router({
 
     if (numberOfCharacters < 2) return { success: false };
 
-    const id1 = Math.floor(Math.random() * numberOfCharacters) + 1;
-    let id2 = Math.floor(Math.random() * numberOfCharacters) + 1;
+    //Not perfect random, because the last or first element will always have much less probability to be chosen
+    const id1 = Math.floor(Math.random() * numberOfCharacters);
+    let id2 = Math.floor(Math.random() * numberOfCharacters);
     while (id2 === id1) {
-      id2 = Math.floor(Math.random() * numberOfCharacters) + 1;
+      id2 = Math.floor(Math.random() * numberOfCharacters);
     }
 
-    const char1 = await prisma.character.findFirst({ where: { id: id1 } });
-    const char2 = await prisma.character.findFirst({ where: { id: id2 } });
+    const arrayChar1 = await prisma.character.findMany({
+      take: 1,
+      skip: id1,
+      orderBy: {
+        id: 'desc'
+      }
+    });
+
+    const arrayChar2 = await prisma.character.findMany({
+      take: 1,
+      skip: id2,
+      orderBy: {
+        id: 'desc'
+      }
+    });
+
+    const char1 = arrayChar1[0];
+    const char2 = arrayChar2[0];
+
+    // const char1 = await prisma.character.findFirst({ where: { id: id1 } });
+    // const char2 = await prisma.character.findFirst({ where: { id: id2 } });
 
     return {
       success: true,
