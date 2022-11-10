@@ -73,7 +73,7 @@ Ps: Group in folders based on functionality first, and then on categories inside
 
 ## Commit Rules
 
-- Categories: fix, feat, docs
+- Categories: fix, feat, refac, config, docs
 - Location of changes in parenthesis before ":" when possible
 - "!" before ":" for breaking changes
   - If has it, must specify in body of commit what the Breaking Change is
