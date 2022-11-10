@@ -71,6 +71,13 @@ https://who-would-win-puce.vercel.app/
 
 Ps: Group in folders based on functionality first, and then on categories inside these functionalities
 
+## Commit Rules
+
+- Categories: fix, feat, docs
+- Location of changes in parenthesis before ":" when possible
+- "!" before ":" for breaking changes
+  - If has it, must specify in body of commit what the Breaking Change is
+
 ## Reference Links
 
 - https://nextjs.org/learn/basics/create-nextjs-app
