@@ -74,8 +74,8 @@ const Home: NextPage = () => {
   return (
     <motion.div
       animate={{
-        x: ['3px', '-2px', '1px', '0px'],
-        y: ['2px', '-3px', '2px', '0px']
+        x: ['0px', '3px', '-2px', '1px', '0px'],
+        y: ['0px', '2px', '-3px', '2px', '0px']
       }}
       transition={{ duration: 0.3, stiffness: 500, delay: 0.52 }}
       className="-z-50 flex h-full w-full flex-col">
