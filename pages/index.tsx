@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AppRouter } from '../server/routers/_app';
 import { trpc } from '../utils/trpc';
+import { motion } from 'framer-motion';
 import headerTexture from '../assets/header.png';
 import cardTexture from '../assets/card.png';
 // import stoneTexture from '../assets/stone.jpg';
@@ -71,7 +72,14 @@ const Home: NextPage = () => {
   console.log('Image', headerTexture);
 
   return (
-    <div className="-z-50 flex h-full w-full flex-col">
+    <motion.div
+      animate={{
+        x: ['3px', '-2px', '1px', '0px'],
+        y: ['2px', '-3px', '2px', '0px']
+        // scale: [1.01, 1.01, 1.01, 1]
+      }}
+      transition={{ duration: 0.3, stiffness: 500, delay: 0.52 }}
+      className="-z-50 flex h-full w-full flex-col">
       {/* Background */}
       <img
         src="https://images.unsplash.com/photo-1525711857929-4272fb4a040f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
@@ -95,9 +103,13 @@ const Home: NextPage = () => {
       <div></div>
 
       <main className="flex h-full flex-col gap-6 p-6 md:gap-10">
-        <h1 className="-rotate-2 bg-slate-50 bg-clip-text text-center font-blackOpsOne text-4xl text-transparent bg-blend-darken  [background-image:url(../assets/stone.jpg)] sm:text-5xl md:text-6xl">
+        <motion.h1
+          initial={{ scale: 3 }}
+          animate={{ scale: 1, rotate: -1.2 }}
+          transition={{ bounceStiffness: 200, ease: 'backIn', duration: 0.5 }}
+          className=" bg-slate-50 bg-clip-text text-center font-blackOpsOne text-4xl text-transparent bg-blend-darken  [background-image:url(../assets/stone.jpg)] sm:text-5xl md:text-6xl">
           Who Would Win in a Fight?
-        </h1>
+        </motion.h1>
         {/* Contestants Section */}
         <section className="flex items-stretch justify-center gap-2 sm:gap-8">
           {/* Option 1 */}
@@ -162,7 +174,7 @@ const Home: NextPage = () => {
           Created by <a href="https://github.com/WixeI">Paulo Portela Martins</a>
         </p>
       </footer>
-    </div>
+    </motion.div>
   );
 };
 
