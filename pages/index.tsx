@@ -112,11 +112,11 @@ const Home: NextPage = () => {
         {/* Contestants Section */}
         <section className="flex items-stretch justify-center gap-2 sm:gap-8">
           {/* Option 1 */}
-          <div className="flex  flex-col items-center">
+          <div className="flex flex-col items-center">
             <button
               onClick={() => canVote && castVote('first')}
               disabled={!canVote}
-              className="relative flex aspect-square h-full w-full max-w-[300px] flex-col items-center justify-center gap-4 rounded-md  p-4 transition-transform hover:scale-105 sm:gap-4 md:aspect-square">
+              className="relative flex aspect-square h-full w-full max-w-[300px] flex-col items-center justify-center gap-4 rounded-md p-4 transition-transform hover:scale-105 sm:gap-4 md:aspect-square">
               <img
                 src={data.char1?.imageSource}
                 alt="option-1"
@@ -126,7 +126,7 @@ const Home: NextPage = () => {
               <img
                 src={cardTexture.src}
                 alt="card"
-                className="absolute left-0 top-0 -z-10  w-full"
+                className="absolute left-0 top-0 -z-10 w-full drop-shadow-[0_0_1rem_rgba(0,0,0,0.5)]"
               />
             </button>
             {/* Percentage */}
@@ -150,7 +150,7 @@ const Home: NextPage = () => {
               <img
                 src={cardTexture.src}
                 alt="card"
-                className="absolute left-0 top-0 -z-10 w-full -scale-x-100"
+                className="absolute left-0 top-0 -z-10 w-full -scale-x-100 drop-shadow-[0_0_1rem_rgba(0,0,0,0.5)]"
               />
             </button>
             {/* Percentage */}
