@@ -78,6 +78,16 @@ Ps: Group in folders based on functionality first, and then on categories inside
 - "!" before ":" for breaking changes
   - If has it, must specify in body of commit what the Breaking Change is
 
+## To-do
+
+- Image Filter to filter NSFW images
+- Filter to deny non-image files (client-side)
+- Find a way to compress images to store
+- Option to create rooms
+  - Change how database is structure
+  - Add custom paths to rooms
+  - Main screen will be to create (create endpoint) or join a room
+
 ## Reference Links
 
 - https://nextjs.org/learn/basics/create-nextjs-app
